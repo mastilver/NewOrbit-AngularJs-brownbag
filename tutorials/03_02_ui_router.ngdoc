@@ -1,0 +1,103 @@
+@ngdoc overview
+@name Ui-router
+@description
+
+
+<example module="app">
+    <file name="app.js">
+
+        angular.module('app', [])
+
+        .config(['$stateProvider', '$breadcrumbProvider', function($stateProvider, $breadcrumbProvider){
+
+            $breadcrumbProvider.setOptions({
+                prefixStateName: 'home',
+                templateUrl: 'headerTemplate.html',
+            });
+
+            $stateProvider.
+            state('root', {
+                url: '',
+                abstract: true,
+                templateUrl: 'root.html', // must contains <ui-view></ui-view>
+                /*   OR   */
+                template: '<ui-view></ui-view>',
+            })
+
+            .state('home', {
+                parent: 'root',
+                templateUrl: 'home.html',
+                controller: 'Home as home',
+                data: {
+                    ncyBreadcrumbLabel: 'Home',
+                }
+            })
+
+            .state('collection', {
+                parent: 'root',
+                abstract: true,
+                url: '/collection',
+                template: '<ui-view></ui-view>',
+            })
+            // /collection
+            .state('collection.list', {
+                // no need for parent attribut
+                url: '',
+                templateUrl: 'collection.html',
+                controller: 'CollectionCtrl as collection',
+                // Collection
+                data: {
+                    ncyBreadcrumbLabel: 'Collection',
+                }
+            })
+            // /collection/create
+            state('colleciton.create', {
+                url: '/create'
+                templateUrl: 'entity.html',
+                controller: 'CreateCtrl as create',
+                // Collection > Create
+                data: {
+                    ncyBreadcrumb: 'Create',
+                    ncyBreadcrumbParent: 'collection.list',
+                }
+            })
+
+            .state('entity', {
+                parent: 'collection',
+                abstract: true,
+                url: '/{id}',
+                controller: 'EntityCtrl as entity',
+                templateUrl: 'entity.html',
+                /*   OR   */
+                template: '<ui-view></ui-view>', // if `entity` is the parent of others states
+                // Collection > Entity: 1
+                data: {
+                    ncyBreadcrumb: 'Entity: {{ entity.id }}',
+                    ncyBreadcrumbParent: 'collection.list',
+                }
+            })
+            // collection/1
+            .state('entity.detail', {
+                url: '',
+                templateUrl: 'entity.html', // only if the view is not defined on `entity` state
+            })
+            // collection/1/edit
+            .state('entity.edit', {
+                url: '/edit',
+                templateUrl: 'entity.html', // only if the view is not defined on `entity` state
+            })
+        }])
+
+        .controller('EntityCtrl', ['$stateParams', function($stateParams){
+            var vm = this;
+
+            vm.id = $stateParams.id;
+        }]);
+
+
+
+    </file>
+    <file name="index.html">
+        <ui-view>
+    </file>
+</example>

@@ -1,0 +1,69 @@
+@ngdoc overview
+@name Restangular
+@description
+
+
+<example module="app">
+    <file name="app.js">
+
+        angular.module('app', [])
+
+        .controller('MainCtrl', ['Restangular', function(Restangular){
+            var vm = this;
+
+            // GET: /company
+            Restangular.all('company').getList()
+            .then(function(companies){
+                vm.companies = companies;
+            }, function(err){
+
+            });
+
+            /*   OR   */
+
+            vm.companies = Restangular.all('company').getList().$object;
+
+
+            // GET: /company/1/employee
+            vm.employees = Restangular.one('company', 1).all('employee').getList().$object;
+
+            /*   OR   */
+
+            vm.employees = vm.companies[0].all('employee').getList().$object;
+
+
+            // PUT: /company/1
+            var companyToEdit = companies[0];
+
+            companyToEdit.name = 'NewOrbit';
+            companyToEdit.put();
+
+
+            // POST: /company
+            var companyToAdd = {
+                name: 'NewOrbit',
+            }
+
+            vm.companies.post(companyToAdd);
+
+            /*   OR   */
+
+            Restangular.all('company').post(companyToAdd);
+
+
+            // DELETE: /company/1
+            vm.companies[0].remove();
+
+
+            // GET company?search=new
+            vm.searchResults = Restangular.all('company').get({search: 'new'}).$object;
+        }]);
+
+
+
+    </file>
+    <file name="index.html">
+
+
+    </file>
+</example>

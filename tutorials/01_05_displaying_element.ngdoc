@@ -1,0 +1,61 @@
+@ngdoc overview
+@name displaying / hiding elements
+@description
+
+
+<example module="app">
+    <file name="app.js">
+
+        angular.module('app', [])
+        .directive('log', [function(){
+            return {
+                restrict: 'E',
+                link: function(scope, element, attrs){
+                    console.log('the content of ' + attrs.name + ' have been rendered');
+                }
+            }
+        }])
+
+        .controller('MainCtrl', [function(){
+        	var vm = this;
+
+        }]);
+
+        
+
+    </file>
+    <file name="index.html">
+
+        <div ng-controller="MainCtrl as ctrl" >
+        
+            <div>
+                <span ng-click="ctrl.if = !ctrl.if" >toggle if</span>
+                <log ng-if="ctrl.if" name="if" >if content</log>
+            </div>
+            
+            <div>
+                <span ng-click="ctrl.hide = !ctrl.hide" >toggle hide</span>
+                <log ng-hide="ctrl.hide" name="hide" >hide content</log>
+            </div>
+
+            <div>
+                <span ng-click="ctrl.show = !ctrl.show" >toggle show</span>
+                <log ng-show="ctrl.show" name="show" >show content</log>
+            </div>
+
+            
+            <div ng-switch="ctrl.switch">
+
+                Switch: <input type="text" ng-model="ctrl.switch" >
+
+                <span ng-switch-when="1" >number 1</span>
+                <span ng-switch-when="2" >number 2</span>
+                <span ng-switch-when="3" >number 3</span>
+                <span ng-switch-when="4" >number 4</span>
+                <span ng-switch-when="5" >number 5</span>
+                <span ng-switch-default>nothing</span>
+            </div>
+        </div>
+
+    </file>
+</example>

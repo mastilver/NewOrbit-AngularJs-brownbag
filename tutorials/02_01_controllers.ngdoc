@@ -1,0 +1,70 @@
+@ngdoc overview
+@name nested controller
+@description
+
+
+<example module="app">
+    <file name="app.js">
+
+        angular.module('app', [])
+
+        .controller('ParentCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
+        	var vm = this;
+
+        	vm.parentVar = 'parent var'
+
+            $rootScope.$on('message', function(event, message){
+                console.log('root:', message);
+            });
+
+            $scope.$on('message', function(event, message){
+                console.log('parent:', message);
+            });
+
+            vm.sendMessage = function(){
+                $scope.$emit('message', 'emit from parent');
+                $scope.$broadcast('message', 'broadcast from parent');
+            };
+        }])
+
+        .controller('ChildCtrl', ['$scope', function($scope){
+            var vm = this;
+
+            vm.childVar = 'child var';
+
+            $scope.$on('message', function(event, message){
+                console.log('child:', message);
+            })
+
+            vm.sendMessage = function(){
+                $scope.$emit('message', 'emit from child');
+                $scope.$broadcast('message', 'broadcast from child');
+            };
+        }])
+
+
+    </file>
+    <file name="index.html">
+
+        <div ng-controller="ParentCtrl as parent" >
+
+
+            parentVar from parent: <strong>{{ parent.parentVar }}</strong><br/>
+
+            childVar from child: <strong>{{ child.childVar }}</strong><br/>
+
+            <button ng-click="parent.sendMessage()">Send message from parent</button><br/>
+
+
+            <div ng-controller="ChildCtrl as child">
+                parentVar from parent: <strong>{{ parent.parentVar }}</strong><br/>
+
+                childVar from child: <strong>{{ child.childVar }}</strong><br/>
+
+                <button ng-click="child.sendMessage()">Send message from child</button><br/>
+            </div>
+
+        </div>
+
+    </file>
+</example>

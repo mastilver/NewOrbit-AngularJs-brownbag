@@ -1,0 +1,65 @@
+@ngdoc overview
+@name resources
+@description
+
+
+<example module="app">
+    <file name="app.js">
+
+    </file>
+    <file name="index.html">
+
+        <h1>Resources</h1>
+
+        <h3>Documentation</h3>
+
+        <ul>
+            <li><a href="https://docs.angularjs.org/api">Official</a></li>
+            <li><a href="http://devdocs.io/angular/">Dev docs</a></li>
+        </ul>
+
+        <h3>List of Articles</h3>
+
+        <ul>
+            <li><a href="http://scotch.io/tag/angular-js">Scotch.io</a></li>
+            <li><a href="http://www.yearofmoo.com/">Year Of Moo</a></li>
+        </ul>
+
+        <h3>Articles</h3>
+
+        <ul>
+            <li><a href="http://amitgharat.wordpress.com/2013/06/08/the-hitchhikers-guide-to-the-directive/">Directives</a></li>
+        </ul>
+
+        <h3>Videos</h3>
+
+        <ul>
+            <li><a href="https://egghead.io/technologies/angularjs">Egg Head</a></li>
+        </ul>
+
+        <h3>Libraries documentation</h3>
+
+        <ul>
+            <li><a href="https://github.com/angular-ui/ui-router/wiki">Ui-Router</a></li>
+            <li><a href="https://github.com/mgonto/restangular">Restangular</a></li>
+            <li><a href="https://github.com/angular-ui/ui-select2">Ui-Select2</a></li>
+            <li><a href="https://github.com/adamalbrecht/ngQuickDate">Ng-Quick-Date</a></li>
+        </ul>
+
+        <h3>Tools</h3>
+
+        <ul>
+            <li><a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk">Batarang</a></li>
+            <li><a href="https://chrome.google.com/webstore/detail/ng-inspector-for-angularj/aadgmnobpdmgmigaicncghmmoeflnamj">Ng Inspector</a></li>
+        </ul>
+
+        <h3>More resources</h3>
+
+        <ul>
+            <li><a href="https://github.com/johnpapa/angularjs-styleguide" >John Papa's Style Guide</a></li>
+            <li><a href="https://github.com/toddmotto/angularjs-styleguide" >Todd Motto's Style Guide</a></li>
+            <li><a href="https://github.com/jmcunningham/AngularJS-Learning">List of resources on Github</a></li>
+        </ul>
+
+    </file>
+</example>

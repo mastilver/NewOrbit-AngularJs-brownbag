@@ -1,0 +1,27 @@
+@ngdoc overview
+@name getting started
+@description
+
+
+<example module="app">
+    <file name="app.js">
+
+        angular.module('app', [])
+
+        .controller('MainCtrl', [function(){
+            var vm = this;
+
+            vm.variable = 'test';
+        }]);
+
+
+
+    </file>
+    <file name="index.html">
+
+        <div ng-controller="MainCtrl as main" >
+            {{ main.variable }}
+        </div>
+
+    </file>
+</example>

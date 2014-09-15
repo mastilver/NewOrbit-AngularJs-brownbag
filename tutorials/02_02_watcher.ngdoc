@@ -1,0 +1,46 @@
+@ngdoc overview
+@name watchers
+@description
+
+
+<example module="app">
+    <file name="app.js">
+
+        angular.module('app', [])
+
+        .controller('MainCtrl', ['$scope', function($scope){
+        	var vm = this;
+            vm.input = '';
+
+            var watcherCount = 0;
+            var changeCount = 0;
+
+            $scope.$watch(function(){
+                console.warn('watcher %d', ++watcherCount);
+                return vm.input;
+            }, function(n, o){
+
+                console.log('old:', o, 'new:', n);
+
+                // WRONG most of the time
+                // indeed, o and n are egal only at initialization
+                // if(o === n) return;
+            });
+
+            vm.onChange = function(){
+                console.info('change', ++changeCount);
+            };
+        }]);
+
+
+
+    </file>
+    <file name="index.html">
+
+        <div ng-controller="MainCtrl as form" >
+            <input ng-model="form.input" ng-change="form.onChange()" /><br/>
+            {{ form.input }}
+        </div>
+
+    </file>
+</example>

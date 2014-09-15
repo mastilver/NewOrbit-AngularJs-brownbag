@@ -1,0 +1,46 @@
+@ngdoc overview
+@name ngClick
+@description
+
+
+<example module="app">
+    <file name="app.js">
+
+        angular.module('app', [])
+
+        .controller('MainCtrl', [function(){
+            var vm = this;
+
+            vm.number = 0;
+
+            vm.increment = function(){
+                vm.number++; 
+            };
+
+            vm.reset = function(){
+                vm.number = 0;
+            }
+
+            vm.set = function(number){
+                vm.number = number;
+            }
+        }]);
+
+
+
+    </file>
+    <file name="index.html">
+
+        <div ng-controller="MainCtrl as counter" >
+            {{ counter.number }}
+
+            <button ng-click="counter.increment()">
+                Increment
+            </button>
+
+            <p ng-click="counter.reset()">Reset</p>
+            <a ng-click="counter.set(10)">Set to 10</a>
+        </div>
+
+    </file>
+</example>

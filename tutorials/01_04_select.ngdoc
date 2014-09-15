@@ -1,0 +1,71 @@
+@ngdoc overview
+@name select
+@description
+
+
+<example module="app">
+    <file name="app.js">
+
+        angular.module('app', [])
+
+        .controller('MainCtrl', [function(){
+            var vm = this;
+
+            vm.selections = {};
+            vm.options = [];
+
+            for(var i = 0; i < 10; i++){
+                vm.options.push({
+                    value: i,
+                    group: 'number',
+                });
+            }
+
+            for(var i = 0; i < 26; i++){
+                vm.options.push({
+                    value: String.fromCharCode(97 + i),
+                    group: 'letter',
+                });
+            }
+
+        }]);
+
+
+
+    </file>
+    <file name="index.html">
+
+        <div ng-controller="MainCtrl as form" >
+            {{ form.selections }}
+
+            <div>
+                select using ngRepeat:
+                <select ng-model="form.selections['ngRepeat']">
+                    <option
+                    ng-repeat="option in form.options"
+                    ng-value="option.value" >
+                        {{ option.value }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                select using ngOptions
+                <select
+                ng-model="form.selections['ngOptions']"
+                ng-options="option as option.value for option in form.options" >
+                </select>
+            </div>
+
+            <div>
+                select using ngOptions and group by
+                <select
+                ng-model="form.selections['ngOptionsGroup']"
+                ng-options="option as option.value group by option.group for option in form.options" >
+                </select>
+            </div>
+
+        </div>
+
+    </file>
+</example>
